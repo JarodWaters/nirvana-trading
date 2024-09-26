@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import PositionForm from './PositionForm';  // Form to open a position
+import PositionList from './PositionList';  // Display open positions
+import TradingChart from './TradingChart';  // TradingView chart component
 
-function App() {
+const App = () => {
+  const [positions, setPositions] = useState([]);
+
+  const handleOpenPosition = async (collateral, leverage, isLong) => {
+    const newPosition = { leverage, collateral, pnl: 0 };  // Mock PnL for now
+    setPositions([...positions, newPosition]);  // Add position to state
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Nirvana Trading Platform</h1>
+      
+      {/* TradingView chart */}
+      <TradingChart />  {/* Add the TradingView chart here */}
+
+      {/* Form to open new positions */}
+      <PositionForm openPosition={handleOpenPosition} />
+
+      {/* List of open positions */}
+      <PositionList positions={positions} />
     </div>
   );
-}
+};
 
 export default App;
