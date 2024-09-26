@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { openPosition } from './blockchain'; // Import the function here
+
 
 const PositionForm = ({ openPosition }) => {
   const [collateral, setCollateral] = useState('');
